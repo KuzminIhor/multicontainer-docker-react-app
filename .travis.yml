@@ -5,20 +5,20 @@ services:
     - docker
 
 before_install: 
-    - docker build -t igorkuzmin/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t ihorkuzmin/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true igorkuzmin/react-test npm run test -- --coverage
+    - docker run -e CI=true ihorkuzmin/react-test npm run test -- --coverage
 
 after_success:
-    - docker build -t igorkuzmin/multi-client ./client
-    - docker build -t igorkuzmin/multi-nginx ./nginx
-    - docker build -t igorkuzmin/multi-server ./server
-    - docker build -t igorkuzmin/multi-server ./worker 
+    - docker build -t ihorkuzmin/multi-client ./client
+    - docker build -t ihorkuzmin/multi-nginx ./nginx
+    - docker build -t ihorkuzmin/multi-server ./server
+    - docker build -t ihorkuzmin/multi-server ./worker 
     #Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #Push to Docker Hub
-    - docker push igorkuzmin/multi-client
-    - docker push igorkuzmin/multi-nginx
-    - docker push igorkuzmin/multi-server
-    - docker push igorkuzmin/multi-worker
+    - docker push ihorkuzmin/multi-client
+    - docker push ihorkuzmin/multi-nginx
+    - docker push ihorkuzmin/multi-server
+    - docker push ihorkuzmin/multi-worker
